@@ -1,42 +1,53 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
 import { type FC } from 'react';
 import { type QueryExecResult } from 'sql.js';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { cn } from '@/lib/utils';
+import TableComponent from './TableComponent';
 
 interface Props {
-  data: QueryExecResult | undefined;
+  tableInfo: QueryExecResult[] | undefined;
+  className?: string;
+  triggerClassName?: string;
 }
 
-const PreviewTable: FC<Props> = ({ data }) => {
-  if (!data) return null;
-  const { columns, values } = data;
+const PreviewTable: FC<Props> = ({
+  tableInfo,
+  className,
+  triggerClassName,
+}) => {
   return (
-    <Table className='h-full w-full overflow-scroll'>
-      <TableHeader>
-        <TableRow>
-          {columns.map((column, index) => (
-            <TableHead key={index} className='w-[100px]'>
-              {column}
-            </TableHead>
-          ))}
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {values.map((val, index) => (
-          <TableRow key={index}>
-            {val.map((val, index) => (
-              <TableCell key={index}>{val}</TableCell>
-            ))}
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+    <Dialog>
+      <DialogTrigger asChild className={cn('', triggerClassName)}>
+        <Button variant='outline' className='flex gap-2'>
+          <span>Show All Tables</span>
+        </Button>
+      </DialogTrigger>
+      <DialogContent
+        className={cn(
+          'grid h-[98%] min-w-[80%] grid-cols-2 gap-2 overflow-y-scroll border-4 p-10',
+          className,
+        )}
+      >
+        {tableInfo ? (
+          tableInfo.map((info, i) => {
+            return (
+              <div
+                key={i}
+                className='rounded-lg border-2 border-black dark:border-white'
+              >
+                <TableComponent
+                  tableInfo={info}
+                  className={'max-h-[500px] overflow-scroll'}
+                />
+              </div>
+            );
+          })
+        ) : (
+          <span>No Table Data</span>
+        )}
+      </DialogContent>
+    </Dialog>
   );
 };
 

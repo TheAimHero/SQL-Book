@@ -8,7 +8,7 @@ import Editor, { type EditorProps, useMonaco } from '@monaco-editor/react';
 import { useTheme } from 'next-themes';
 import { Loader2 } from 'lucide-react';
 import { type editor } from 'monaco-editor';
-import { useMediaQuery } from '@uidotdev/usehooks';
+import { useMediaQuery } from 'usehooks-ts';
 
 interface Props {
   data?: string;

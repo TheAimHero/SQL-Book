@@ -1,6 +1,6 @@
 'use client';
 import React, { type FC } from 'react';
-import { useMediaQuery } from '@uidotdev/usehooks';
+import { useMediaQuery } from 'usehooks-ts';
 import { Button } from '@/components/ui/button';
 import {
   DrawerTrigger,

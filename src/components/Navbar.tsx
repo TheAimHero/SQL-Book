@@ -6,7 +6,9 @@ const Navbar = async () => {
   return (
     <nav className='flex h-[60px] items-center justify-between bg-[hsl(var(--accent))] px-4 sm:px-8'>
       <Link href='/'>
-        <span className='mx-4 text-xl font-semibold sm:mx-10'>SQL Book.</span>
+        <span className='text-md mx-4 select-none font-semibold italic underline sm:mx-10'>
+          SQL Book.
+        </span>
       </Link>
       <div>
         <div className='flex gap-5'>

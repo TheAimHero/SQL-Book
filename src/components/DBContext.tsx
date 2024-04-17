@@ -1,6 +1,5 @@
 'use client';
 
-import localforage from 'localforage';
 import React, {
   createContext,
   type PropsWithChildren,
@@ -22,13 +21,6 @@ const DBContext = createContext<DBContextType>({
   status: 'loading',
 });
 
-const store = localforage.createInstance({
-  name: 'sql-book',
-  description: 'used to store db and sql query results',
-  storeName: 'sqlite-store',
-  size: 1024 * 1024 * 2,
-});
-
 const DBContextProvider = ({ children }: PropsWithChildren) => {
   const [db, setDb] = useState<DBContextType['db']>();
   const [error, setError] = useState<DBContextType['error']>();
@@ -37,11 +29,10 @@ const DBContextProvider = ({ children }: PropsWithChildren) => {
     setStatus('loading');
     async function exec() {
       const wasm = await initSqlJs({
-        locateFile: (file) => `https://sql.js.org/dist/${file}`,
+        locateFile: () => `/sql-wasm.wasm`,
       });
       const db = new wasm.Database();
       setDb(db);
-      await store.setItem('sqlite-db', db);
       setStatus('success');
     }
     exec().catch((e: Error) => {
