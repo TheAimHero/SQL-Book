@@ -14,7 +14,7 @@ import { useDebounceCallback } from 'usehooks-ts';
 import { type QueryExecResult } from 'sql.js';
 import { useDB } from '@/components/DBContext';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import TableComponent from './TableComponent';
+import TableComponent from '@/components/TableComponent';
 import PreviewTable from './PreviewTable';
 const OptionsBar = dynamic(() => import('./OptionsBar'));
 
