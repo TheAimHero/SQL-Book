@@ -18,7 +18,9 @@ interface TableProps {
 const TableComponent: FC<TableProps> = ({ tableInfo, className }) => {
   if (!tableInfo)
     return (
-        <span className='flex items-center mx-auto justify-between text-3xl'>No Data</span>
+      <span className='mx-auto flex items-center justify-between text-3xl'>
+        No Data
+      </span>
     );
   const { values, columns } = tableInfo;
   return (
