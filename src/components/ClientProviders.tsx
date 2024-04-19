@@ -4,7 +4,6 @@ import * as React from 'react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { type ThemeProviderProps } from 'next-themes/dist/types';
 import DBContextProvider from './DBContext';
-import DBDataContextProvider from './DBNameContext';
 
 const ClientProviders = ({ children }: ThemeProviderProps) => {
   return (
@@ -14,9 +13,7 @@ const ClientProviders = ({ children }: ThemeProviderProps) => {
       storageKey='sql-book-theme'
       defaultTheme='dark'
     >
-      <DBDataContextProvider>
-        <DBContextProvider>{children}</DBContextProvider>
-      </DBDataContextProvider>
+      <DBContextProvider>{children}</DBContextProvider>
     </NextThemesProvider>
   );
 };

@@ -3,7 +3,7 @@ import { type QueryExecResult } from 'sql.js';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
-import TableComponent from './TableComponent';
+import TableComponent from '@/components/TableComponent';
 
 interface Props {
   tableInfo: QueryExecResult[] | undefined;
