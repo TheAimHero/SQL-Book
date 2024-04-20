@@ -16,6 +16,8 @@ import { useDB } from '@/components/DBContext';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import TableComponent from '@/components/TableComponent';
 import PreviewTable from './PreviewTable';
+import UploadFile from '@/components/UploadFile';
+import DownloadButton from './DownloadButton';
 const OptionsBar = dynamic(() => import('./OptionsBar'));
 
 const Page = () => {
@@ -87,6 +89,19 @@ const Page = () => {
       <OptionsBar>
         <Button onClick={() => exec()}>Execute</Button>
         <PreviewTable tableInfo={execResults} triggerClassName='' />
+        <UploadFile
+          maxSizeMb={2}
+          className='h-[300px]'
+          onUpload={(file) => {
+            const reader = new FileReader();
+            reader.onload = async () => {
+              setSqlQuery(reader.result as string);
+            };
+            reader.readAsText(file as unknown as Blob);
+            setSqlQuery(reader.result as string);
+          }}
+        />
+        <DownloadButton fileText={sqlQuery} />
       </OptionsBar>
     </Fragment>
   );
